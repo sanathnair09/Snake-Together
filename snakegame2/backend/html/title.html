@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+   <title>Snake Together</title>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="/static/cs.css">
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+   <link rel="icon" href="/static/phaser/assets/snake.png"/>
+   <style>
+      body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+      body, html {
+      height: 100%;
+      line-height: 1.8;
+      scroll-behavior: smooth;
+      }
+      /* Full height image header */
+      .bgimg-1 {
+      background-position: center !important;
+      background-size: cover !important;
+      min-height: 100% !important;
+      height:100vh;
+      }
+      .img1{
+      background-image: url("/static/phaser/assets/home.png");
+      }
+      .img3{
+      background-image: url("https://image.winudf.com/v2/image1/Y29tLnN1cGVyY2VsbC5icmF3bHN0YXJzX3NjcmVlbl8yXzE1NjMxNjQ2ODRfMDg3/screen-2.jpg?fakeurl=1&type=.jpg"); 
+      }
+      .img2{
+      background-image: url("https://i.redd.it/jqgw61dcx8x21.png"); 
+      }
+      #navbar{
+      transition: 0.5s;
+      top: -100px;
+      }
+      .color{
+      color: white;
+      font-weight: 900;
+      }
+      .w3-bar .w3-button {
+      padding: 16px;
+      }
+      .text-hold{
+      text-align: center;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      }
+      .button-color{
+      background-color: #3287e3 !important;
+      color: white !important;
+      transition: 0.5s;
+      position: relative;
+      top: 40vh;
+      }
+      .button-color:hover{
+      background-color: #7dc2ff !important;
+      }
+      .back-sand{
+      background-color: #EAE7DC !important;
+      }
+      .play-button{
+        width: 200px;
+        height: 100px;
+        
+        background-color: white;
+        text-align: center;
+        padding-top: 10px;
+        font-size: 20px;
+        font-family: "Monserrat";
+        cursor: pointer;
+        padding: 15px 50px;
+        
+      }
+      .div-button{
+        width: 300px;
+        height: 100px;
+        padding: 30px;
+        text-align: center;
+        background-color: #53C2F7;
+        left: calc(50vw - 150px);
+        top: 55vh;
+        position: absolute;
+      }
+   </style>
+   <body>
+      <!-- Navbar (sit on top) -->
+      <div class="w3-top " id="navbar">
+         <div class="w3-bar w3-white w3-card" id="myNavbar">
+            <a href="#home" class="w3-bar-item w3-button w3-wide">SNAKE TOGETHER</a>
+            <!-- Right-sided navbar links -->
+            <div class="w3-right w3-hide-small">
+                <a href="#playnow" class="w3-bar-item w3-button"><i class="fa fa-user"></i> PLAY NOW</a>
+               <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
+               <a href="#team" class="w3-bar-item w3-button"><i class="fa fa-bar-chart"></i> POWERUPS</a>
+               <a href="#work" class="w3-bar-item w3-button"><i class="fa fa-gamepad"></i> GALLERY</a>
+               <a href="#contact" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> CONTACT</a>
+            </div>
+            <!-- Hide right-floated links on small screens and replace them with a menu icon -->
+            <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()">
+            <i class="fa fa-bars"></i>
+            </a>
+         </div>
+      </div>
+      <!-- Sidebar on small screens when clicking the menu icon -->
+      <nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="mySidebar">
+         <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a>
+         <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">ABOUT</a>
+         <a href="#team" onclick="w3_close()" class="w3-bar-item w3-button">CHARACTERS</a>
+         <a href="#stats" onclick="w3_close()" class="w3-bar-item w3-button">STATS</a>
+         <a href="#work" onclick="w3_close()" class="w3-bar-item w3-button">GAME MODE</a>
+         <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">CONTACT</a>
+      </nav>
+      <header class="bgimg-1 img1"></header>
+      <div class="div-button"><a class="play-button" href ="#playnow">Play Now!</a></div>
+      
+      
+      <!-- Promo Section - "We know design" -->
+      <div class="w3-container w3-light-grey" style="padding:128px 16px" id="playnow">
+         <div class="w3-row-padding">
+            <div class="w3-col m6">
+               <h3>New Twist on Old Game.</h3>
+               <p>Snake has been around for ages. It started with a simple box as a snake and worked with simple javascript. However, we present an improved version with multiplayer features and a capture the style game. It also has cool powerups to try.</p>
+               <p>Learn more about what has been done to improve this game and why it is still a top game today.</p>
+               <p><a href="/game" class="w3-button w3-black"><i class="fa fa-th"> </i> Play Now</a></p>
+            </div>
+            <div class="w3-col m6">
+               <img src="/static/phaser/assets/pic11.png" alt="Buildings" width="700" height="394">
+            </div>
+         </div>
+      </div>
+      <!-- About Section -->
+      <div class="w3-container back-sand" style="padding:128px 16px" id="about">
+         <h3 class="w3-center">ABOUT THE GAME</h3>
+         <p class="w3-center w3-large">Why you should learn to play.</p>
+         <div class="w3-row-padding w3-center" style="margin-top:64px">
+            <div class="w3-quarter">
+               <i class="fa fa-graduation-cap w3-margin-bottom w3-jumbo w3-center"></i>
+               <p class="w3-large">Easy to Learn</p>
+               <p>The easy to learn movement and shooting controls makes the game more fun to play. </p>
+            </div>
+            <div class="w3-quarter">
+               <i class="fa fa-clock-o w3-margin-bottom w3-jumbo"></i>
+               <p class="w3-large">Short Games</p>
+               <p>Each game only lasts a few minutes so it can be played during a small break, lunch, or other times you are waiting.</p>
+            </div>
+            <div class="w3-quarter">
+               <i class="fa fa-connectdevelop w3-margin-bottom w3-jumbo"></i>
+               <p class="w3-large">Variety</p>
+               <p>There are a variety of powerups and strategies that you can try.</p>
+            </div>
+            <div class="w3-quarter">
+               <i class="fa fa-eye w3-margin-bottom w3-jumbo"></i>
+               <p class="w3-large">Attractiveness</p>
+               <p>The game has a simple navigation interface, and is aesthetically pleasing to the eye. It is good looking and easy to navigate menus.</p>
+            </div>
+         </div>
+      </div>
+      <!-- Team Section -->
+      <div class="w3-container" style="padding:128px 16px" id="team">
+         <h3 class="w3-center">POWERUPS</h3>
+         <p class="w3-center w3-large">Powerup your game.</p>
+         <div class="w3-row-padding" style="margin-top:64px">
+            <div class="w3-col l3 m6 w3-margin-bottom">
+               <div class="w3-card">
+                  <img src="https://cdn3.iconfinder.com/data/icons/iconic-1/32/arrow_up_alt1-512.png" alt="John" style="width:100%">
+                  <div class="w3-container">
+                     <h3>Super Speed</h3>
+                     <p class="w3-opacity">The Speed Gadget</p>
+                     <p>Speed through the map with the super speed powerup! Easily make your way past everyone but make sure to not hit the walls in the process!</p>
+                     <p><button class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope"></i> Learn More</button></p>
+                  </div>
+               </div>
+            </div>
+            <div class="w3-col l3 m6 w3-margin-bottom">
+               <div class="w3-card">
+                  <img src="https://www.clipartkey.com/mpngs/m/161-1619358_download-blue-shield-clip-art-png-shield-clipart.png" alt="Jane" style="width:100%">
+                  <div class="w3-container">
+                     <h3>Invincibility </h3>
+                     <p class="w3-opacity">Protect Yourself</p>
+                     <p>Prevent yourself from getting hit or dying! Pick up this gadget and run through the map without any obstacles. You can go through both enemies and walls for 5 seconds.</p>
+                     <p><button class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope"></i> Learn More</button></p>
+                  </div>
+               </div>
+            </div>
+            <div class="w3-col l3 m6 w3-margin-bottom">
+               <div class="w3-card">
+                  <img src="https://i.pinimg.com/originals/a7/21/15/a72115694d8a0f3c972a9b04a64c0159.png" alt="Mike" style="width:100%">
+                  <div class="w3-container">
+                     <h3>Growth</h3>
+                     <p class="w3-opacity">Double the Apples</p>
+                     <p>Grow your snake at double the speed. This powerup will make you longer so that your enemy has a harder time getting through the map.</p>
+                     <p><button class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope"></i> Learn More</button></p>
+                  </div>
+               </div>
+            </div>
+            <div class="w3-col l3 m6 w3-margin-bottom">
+               <div class="w3-card">
+                  <img src="https://www.nicepng.com/png/detail/8-80766_trump-wall-png-clip-art-black-and-white.png" alt="Dan" style="width:100%">
+                  <div class="w3-container">
+                     <h3>Wall Breaker</h3>
+                     <p class="w3-opacity">Break Down Enemy Walls</p>
+                     <p>Destroy every wall in your path as you user the wall breaker powerup. Walls will fade away for the rest of the game as you use the wall breaker.</p>
+                     <p><button class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope"></i> Learn More</button></p>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- Promo Section "Statistics" -->
+      <div class="w3-container w3-row w3-center w3-dark-grey w3-padding-64" id="stats">
+         <div class="w3-quarter">
+            <span class="w3-xxlarge">4</span>
+            <br>PowerUps
+         </div>
+         <div class="w3-quarter">
+            <span class="w3-xxlarge">2-6</span>
+            <br>Players
+         </div>
+         <div class="w3-quarter">
+            <span class="w3-xxlarge">2</span>
+            <br>Flags
+         </div>
+         <div class="w3-quarter">
+            <span class="w3-xxlarge">95%</span>
+            <br>Uptime
+         </div>
+      </div>
+      <!-- Work Section -->
+      <div class="w3-container" style="padding:128px 16px" id="work">
+         <h3 class="w3-center">GAME GALLERY</h3>
+         <p class="w3-center w3-large">See the game in action!</p>
+         <div class="w3-row-padding" style="margin-top:64px">
+            <div class="w3-col l3 m6">
+               <img src="/static/phaser/assets/pic1.png" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="Gem Grab">
+            </div>
+            <div class="w3-col l3 m6">
+               <img src="/static/phaser/assets/pic2.png" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="Showdown">
+            </div>
+            <div class="w3-col l3 m6">
+               <img src="/static/phaser/assets/pic3.png" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="Brawl Ball">
+            </div>
+            <div class="w3-col l3 m6">
+               <img src="/static/phaser/assets/pic4.png" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="Siege">
+            </div>
+         </div>
+         <div class="w3-row-padding" style="margin-top:64px">
+            <div class="w3-col l3 m6">
+               <img src="/static/phaser/assets/pic5.png" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="Gem Grab">
+            </div>
+            <div class="w3-col l3 m6">
+               <img src="/static/phaser/assets/pic8.png" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="Showdown">
+            </div>
+            <div class="w3-col l3 m6">
+               <img src="/static/phaser/assets/pic6.png" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="Brawl Ball">
+            </div>
+            <div class="w3-col l3 m6">
+               <img src="/static/phaser/assets/pic7.png" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="Siege">
+            </div>
+         </div>
+      </div>
+      <!-- Modal for full size images on click-->
+      <div id="modal01" class="w3-modal w3-black" onclick="this.style.display='none'">
+         <span class="w3-button w3-xxlarge w3-black w3-padding-large w3-display-topright" title="Close Modal Image">×</span>
+         <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
+            <img id="img01" class="w3-image">
+            <p id="caption" class="w3-opacity w3-large"></p>
+         </div>
+      </div>
+      <!-- Contact Section -->
+      <div class="w3-container w3-light-grey back-sand" style="padding:128px 16px" id="contact">
+         <h3 class="w3-center">CONTACT</h3>
+         <p class="w3-center w3-large">Lets get in touch. Send us a message:</p>
+         <div style="margin-top:48px">
+            <p><i class="fa fa-map-marker fa-fw w3-xxlarge w3-margin-right"></i> California, US</p>
+            <p><i class="fa fa-phone fa-fw w3-xxlarge w3-margin-right"></i> Phone: +1 714-123-4567</p>
+            <p><i class="fa fa-envelope fa-fw w3-xxlarge w3-margin-right"> </i> Email: contact@brawlstars.com</p>
+            <br>
+            <form action="/action_page.php" target="_blank">
+               <p><input class="w3-input w3-border" type="text" placeholder="Name" required name="Name"></p>
+               <p><input class="w3-input w3-border" type="text" placeholder="Email" required name="Email"></p>
+               <p><input class="w3-input w3-border" type="text" placeholder="Subject" required name="Subject"></p>
+               <p><input class="w3-input w3-border" type="text" placeholder="Message" required name="Message"></p>
+               <p>
+                  <button class="w3-button w3-black" type="submit">
+                  <i class="fa fa-paper-plane"></i> SEND MESSAGE
+                  </button>
+               </p>
+            </form>
+            <!-- Image of location/map -->
+         </div>
+      </div>
+      <!-- Footer -->
+      <footer class="w3-center w3-black w3-padding-64">
+         <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+         <div class="w3-xlarge w3-section">
+            <i class="fa fa-facebook-official w3-hover-opacity"></i>
+            <i class="fa fa-instagram w3-hover-opacity"></i>
+            <i class="fa fa-snapchat w3-hover-opacity"></i>
+            <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+            <i class="fa fa-twitter w3-hover-opacity"></i>
+            <i class="fa fa-linkedin w3-hover-opacity"></i>
+         </div>
+      </footer>
+      <script>
+        document.getElementById("navbar").style.top = 0;
+        console.log(document.getElementById("navbar"))
+      </script>
+   </body>
+</html>
